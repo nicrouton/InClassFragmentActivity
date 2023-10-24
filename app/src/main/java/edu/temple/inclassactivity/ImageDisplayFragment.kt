@@ -20,6 +20,8 @@ class ImageDisplayFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // don't assume its initialized
         // If we have arguments
         arguments?.let { it ->
             // If we find the specific argument
@@ -39,10 +41,25 @@ class ImageDisplayFragment : Fragment() {
 
         // The recycler view is the root element of the Fragment's layout
         // as such the view argument passed to onViewCreated() is the RecyclerView
+        // TODO check if something is initialized
         with (view as RecyclerView) {
-            adapter = CustomRecyclerAdapter(images)
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            if (::images.isInitialized) {
+                adapter = CustomRecyclerAdapter(images)
+                layoutManager = GridLayoutManager(requireContext(), 2)
+            }
         }
+    }
+
+    // mutator to change the int array used in the fragment
+    // give custom adapter the array
+    // give recyclerview adapter
+    fun setImages(array:IntArray) {
+        images = array
+        val adapter = CustomRecyclerAdapter(array)
+
+        (view as RecyclerView).adapter = adapter
+
+        // view mutable list needs notify dataset changed(would be called after .adapter
     }
 
     companion object {
@@ -54,3 +71,4 @@ class ImageDisplayFragment : Fragment() {
             }
     }
 }
+

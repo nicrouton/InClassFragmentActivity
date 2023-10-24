@@ -3,7 +3,10 @@ package edu.temple.inclassactivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
+// auto fragment instantiation
 class MainActivity : AppCompatActivity() {
+
+    lateinit var someVar: Array<Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,10 +20,22 @@ class MainActivity : AppCompatActivity() {
         val fragment1= ImageDisplayFragment.newInstance(imageArray)
 
         // add a support fragment manager
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.imageFragment, fragment1)
-            .commit()
+        // checking to see if a fragment is attached or if it is null
+        // if it is null do transactions again, if it isn't use the old one
+        // fragment reference or null for findfrag
+        // !is = is not
+
+        /*if (supportFragmentManager.findFragmentById(R.id.imageFragment) !is ImageDisplayFragment) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.imageFragment, fragment1)
+                .addToBackStack(null)
+                .setReorderingAllowed(true)
+                .commit()
+
+        }*/
+
+        //if (::someVar.isInitialized)
 
     }
 }
