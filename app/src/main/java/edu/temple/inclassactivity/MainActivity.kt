@@ -2,6 +2,7 @@ package edu.temple.inclassactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 
 // auto fragment instantiation
 class MainActivity : AppCompatActivity() {
@@ -16,8 +17,16 @@ class MainActivity : AppCompatActivity() {
         val imageArray = IntArray(typedArray.length()) {typedArray.getResourceId(it, 0)}
         typedArray.recycle()
 
+
+        val imageButton = findViewById<Button>(R.id.imageButton)
+
+        imageButton.setOnClickListener {
+            (supportFragmentManager.findFragmentById(R.id.imageFragment) as ImageDisplayFragment).setImages(imageArray)
+        }
+
+
         // Attach an instance of ImageDisplayFragment using factory method
-        val fragment1= ImageDisplayFragment.newInstance(imageArray)
+        //val fragment1= ImageDisplayFragment.newInstance(imageArray)
 
         // add a support fragment manager
         // checking to see if a fragment is attached or if it is null

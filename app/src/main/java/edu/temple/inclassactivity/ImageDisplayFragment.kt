@@ -45,8 +45,8 @@ class ImageDisplayFragment : Fragment() {
         with (view as RecyclerView) {
             if (::images.isInitialized) {
                 adapter = CustomRecyclerAdapter(images)
-                layoutManager = GridLayoutManager(requireContext(), 2)
             }
+            layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }
 
