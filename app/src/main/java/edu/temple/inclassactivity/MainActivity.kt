@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         // if it is null do transactions again, if it isn't use the old one
         // fragment reference or null for findfrag
         // !is = is not
-
+// merged
         /*if (supportFragmentManager.findFragmentById(R.id.imageFragment) !is ImageDisplayFragment) {
             supportFragmentManager
                 .beginTransaction()
